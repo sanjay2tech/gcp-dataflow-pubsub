@@ -1,4 +1,4 @@
-package com.smlabs;
+package com.bachinalabs;
 
 import org.apache.beam.runners.dataflow.DataflowRunner;
 import org.apache.beam.runners.dataflow.options.DataflowPipelineOptions;
@@ -21,8 +21,8 @@ public class StreamingPipepline {
         // and specify DataflowRunner.
         options.setProject("staticweb-test");
         options.setRegion("us-central1");
-        options.setStagingLocation("gs://team_dataflow_temp/binaries/");
-        options.setGcpTempLocation("gs://team_dataflow_temp/temp/");
+        options.setStagingLocation("gs://sm_dataflow_temp/binaries/");
+        options.setGcpTempLocation("gs://sm_dataflow_temp/temp/");
         options.setNetwork("default");
         options.setSubnetwork("regions/us-central1/subnetworks/default");
         options.setRunner(DataflowRunner.class);
@@ -33,7 +33,7 @@ public class StreamingPipepline {
         p.apply("Read PubSub Messages", PubsubIO.readMessagesWithAttributesAndMessageId().fromTopic("projects/staticweb-test/topics/TOPIC_DATAFLOW_FILES"))
                 .apply(new ReadPubSubMessages())
                 .apply(Window.into(FixedWindows.of(Duration.standardMinutes(1))))
-                .apply("Write Bucket Names", TextIO.write().to("gs://team_dataflow_output/")
+                .apply("Write Bucket Names", TextIO.write().to("gs://sm_dataflow_output/")
                        .withWindowedWrites().withNumShards(1));
 
 

@@ -1,4 +1,4 @@
-package com.smlabs;
+package com.bachinalabs;
 
 import org.apache.beam.sdk.io.gcp.pubsub.PubsubMessage;
 import org.apache.beam.sdk.transforms.DoFn;
