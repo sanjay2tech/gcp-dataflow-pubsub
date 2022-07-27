@@ -13,6 +13,7 @@ public class ReadPubSubMessagesFn extends DoFn<PubsubMessage, String> {
         System.out.println("Bucket Id::::"+ c.element().getAttribute("objectId"));
         String bucketName = c.element().getAttribute("bucketId");
         String fileName = c.element().getAttribute("objectId");
-        c.output("Bucket Name::" + bucketName +"  File Name::::" + fileName);
+        //c.output("Bucket Name::" + bucketName +"  File Name::::" + fileName);
+        c.output("gs://" + bucketName + "//" + fileName);
     }
 }
